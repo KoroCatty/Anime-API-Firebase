@@ -29,7 +29,7 @@ interface ApiResponse {
 const AnimeApi = ({ search, setSearch }: PropsType) => {
   const animeApiCSS = css`
     .animeApi {
-      margin-top: 40px;
+
 
       .animes {
         margin: 0 80px;
@@ -193,7 +193,7 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
   return (
     <section css={animeApiCSS}>
       <div className="animeApi">
-        <h2 className="commonTitle">Animes</h2>
+        {/* <h2 className="commonTitle">Animes</h2> */}
 
         <div className="animes">
           <input

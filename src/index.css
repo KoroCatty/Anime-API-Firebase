@@ -1,6 +1,7 @@
 /* COLOR SHEET: https://tailwindcss.com/docs/customizing-colors */
 :root {
-  --primary: #1e1e1e;
+  /* --primary: #1e1e1e; */
+  --primary: rgb(250,251,244);
   --complementary: #111827; /* TAILWIND: GRAY 900 */
   --complementarySkew: #212529
   --highlight: #9ca3af; /* TAILWIND: GRAY 400 */
@@ -9,6 +10,8 @@
   --success: #16a34a; /* TAILWIND: GREEN 600 */
   --error: #dc2626; /* TAILWIND: RED 600 */
 	--white: rgba(250, 250, 249, 1);
+  --font: rgb(241,161,165);
+  --bg: rgba(241,161,165, 0.05);
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -63,9 +66,11 @@ table {
 /* CUSTOM STYLES */
 body {
 	font-family: 'Inter', sans-serif;
-	background-color: var(--primary);
-	color: var(--white);
+	/* background-color: var(--primary);
+	color: var(--white); */
 	overflow-x: hidden;
+  background-color: var(--bg);
+  background: url("/Images/bg_cover.png");
 }
 
 a {

@@ -31,12 +31,19 @@ function ChangePageTop() {
 }
 
 function Header() {
-  // ==============================================
-  // CSS
-  // ==============================================
   const headerCSS = css`
-    .nav {
-      background-color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      max-width: 1280px;
+      width: 100%;
+      
+      .nav {
+        /* background-color: rgba(0, 0, 0, 0.6); */
+        margin: 0 auto;
+  
 
       // 1px〜519px
       ${min[0] + max[0]} {
@@ -58,6 +65,9 @@ function Header() {
         gap: 20px;
         padding-left: 2%;
         align-items: center;
+        margin: 0 auto;
+        width: 100%;
+      max-width: 1200px;
 
         // 1px〜519px
         ${min[0] + max[0]} {
@@ -72,6 +82,7 @@ function Header() {
           &--link {
             font-size: 1rem;
             color: white;
+            
 
             // 1px〜519px
             ${min[0] + max[0]} {
@@ -216,23 +227,25 @@ function SignOutButton() {
 function UserInfo() {
   return (
     <>
-      <div style={{}}>
+      <div style={{background:"rgba(241,161,165, 0.9)"}}>
         {/* ログインしてるユーザーのアイコンを表示 */}
         <img
           className="googleIcon inNav"
           style={{
             width: 60,
             borderRadius: "50%",
+            filter: "brightness(1.3)",
+
           }}
           src={auth.currentUser?.photoURL ?? "default_value"} // todo:
           alt="Google Icon"
         />
-        <p
+        {/* <p
           className="googleNameInNav"
           style={{ textAlign: "center", fontSize: "1rem" }}
         >
           {auth.currentUser?.displayName}
-        </p>
+        </p> */}
       </div>
     </>
   );

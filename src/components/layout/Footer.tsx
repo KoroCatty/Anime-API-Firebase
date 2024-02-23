@@ -18,6 +18,7 @@ export const Footer = () => {
       /* position: relative;
       height: 100px;
       color: rgb(212, 212, 212); */
+      color: var(--font);
 
       &Box {
         /* position: absolute;
@@ -28,8 +29,9 @@ export const Footer = () => {
 
         &__title {
           text-align: center;
-          font-size: 2rem;
+          font-size: 1.3rem;
           padding-bottom: 40px;
+          letter-spacing: 0.1rem;
 
           /* @include mq(s) {
         font-size: 1.2rem;
@@ -41,7 +43,7 @@ export const Footer = () => {
         }
 
         &__privacy {
-          font-size: 1.4rem;
+          font-size: 1rem;
           color: rgb(212, 212, 212);
           display: block;
           width: fit-content;
@@ -72,7 +74,7 @@ export const Footer = () => {
     <footer css={footerCSS}>
       <div className="footer">
         <div className="footerBox">
-          <h5 className="footerBox__title">©︎Kaz DEV All Rights Reserved</h5>
+          <h5 className="footerBox__title">©︎KZ DEV</h5>
           <Link
             onClick={ChangePageTop}
             to="/privacy"
