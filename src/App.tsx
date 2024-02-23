@@ -15,8 +15,7 @@ import NotFound from "./pages/NotFound";
 // import "./stylesheets/main.scss";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// three.js
-// import Bg3d from "../Bg3d";
+
 
 function App() {
   // ここで定義したsearchをHome.jsxに渡す
