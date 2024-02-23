@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/contact", "destination": "/" },
+    { "source": "/about", "destination": "/" },
+    { "source": "/editpost/(.*)", "destination": "/" },
+    { "source": "/createpost/", "destination": "/" },
+    { "source": "/(.*)", "destination": "/" }
+]
+}

@@ -1,0 +1,124 @@
+/* COLOR SHEET: https://tailwindcss.com/docs/customizing-colors */
+:root {
+  --primary: #1e1e1e;
+  --complementary: #111827; /* TAILWIND: GRAY 900 */
+  --complementarySkew: #212529
+  --highlight: #9ca3af; /* TAILWIND: GRAY 400 */
+  --brand: #60a5fa; /* TAILWIND: BLUE 400 */
+  --brandSkew: #818cf8; /* TAILWIND: INDIGO 400 */
+  --success: #16a34a; /* TAILWIND: GREEN 600 */
+  --error: #dc2626; /* TAILWIND: RED 600 */
+	--white: rgba(250, 250, 249, 1);
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+   Reset CSS
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* CUSTOM STYLES */
+body {
+	font-family: 'Inter', sans-serif;
+	background-color: var(--primary);
+	color: var(--white);
+	overflow-x: hidden;
+}
+
+a {
+	text-decoration: none;
+
+}
+
+// Three.js 3D
+#webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Common Title */
+.commonTitle {
+  background-image: linear-gradient(
+    to left,
+    #fff20d 0,
+    #ff790d 14.28%,
+    #ff0d1a 28.56%,
+    #f20dff 42.85%,
+    #0d93ff 57.14%,
+    #0dfff2 71.42%,
+    #93ff0d 85.71%,
+    #fff20d 100%
+  );
+  text-align: center;
+  font-size: 3.2rem;
+  font-weight: 600;
+  padding: 40px 0;
+
+  background-size: 1000%;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-animation: gra 10s linear infinite;
+  animation: gra 10s linear infinite;
+
+  @include mq(s) {
+    font-size: 32px;
+    padding-bottom: 20px;
+  }
+
+  @include mq(m) {
+    font-size: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+@keyframes gra {
+  to {
+    background-position-x: -110%;
+  }
+}
