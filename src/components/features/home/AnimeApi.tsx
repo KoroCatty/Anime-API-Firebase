@@ -102,6 +102,11 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
           height: 40px;
           border-radius: 4px;
           margin-bottom: 40px;
+
+          // 1px〜519px
+          ${min[0] + max[0]} {
+            width: 80%;
+          }
         }
 
         // inside of the input
@@ -134,6 +139,12 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
           text-shadow: 0 3px 20px rgba(241, 161, 165, 1);
           background-color: var(--bg);
           font-size: 1.1rem;
+
+          // 1px〜519px
+          ${min[0] + max[0]} {
+           width: 50%;
+           margin-bottom: 2rem;
+          }
 
           &::before {
             content: "🔍";

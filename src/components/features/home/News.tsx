@@ -44,7 +44,13 @@ const newsCSS = css`
     &Contents {
       display: flex;
       align-items: center;
-      height: 280px;
+      height: 290px;
+      /* border: 1px solid var(--font); */
+      border-radius: 8px;
+      background-color: var(--bg);
+      box-shadow: 0 2px 1px var(--font);
+      width: 90% !important;
+      padding: 0.8rem;
 
       span {
         font-weight: bold;
@@ -126,6 +132,7 @@ const newsCSS = css`
     .newsPostBtns {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0 1rem;
       text-align: center;
 

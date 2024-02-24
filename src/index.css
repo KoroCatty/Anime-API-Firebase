@@ -63,12 +63,15 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
+/* ================ */
 /* CUSTOM STYLES */
+/* ================ */
+html {
+  overflow-x: hidden;
+}
+
 body {
 	font-family: 'Inter', sans-serif;
-	/* background-color: var(--primary);
-	color: var(--white); */
 	overflow-x: hidden;
   background-color: var(--bg);
   background: url("/Images/bg_cover.png");
@@ -123,7 +126,10 @@ a {
 }
 
 
-/* .slick-slide .slick-active .slick-current {
-  width: 70%;
+/* .slick-slide.slick-active.slick-current {
+  
+  background-color: red;
+  color: green;
+  width: 300px;
 } */
 

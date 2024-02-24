@@ -55,6 +55,11 @@ function Header() {
       margin: 0 auto;
       max-width: 1280px;
 
+      // 1px〜519px
+      ${min[0] + max[0]} {
+        padding: 0 1rem;
+      }
+
       &Wrap {
         display: flex;
         align-items: center;
