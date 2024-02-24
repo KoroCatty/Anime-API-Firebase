@@ -37,60 +37,114 @@ function Header() {
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
-    max-width: 1280px;
     width: 100%;
+    /* height: 80px; */
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(241, 161, 165, 0.2);
+      z-index: -1;
+    }
 
     .nav {
-      /* background-color: rgba(0, 0, 0, 0.6); */
       margin: 0 auto;
-
-      // 1px〜519px
-      ${min[0] + max[0]} {
-        overflow: scroll;
-      }
-      // 520px〜767px
-      ${min[1] + max[1]} {
-        overflow: scroll;
-      }
-      // 768px〜989px
-      ${min[2] + max[2]} {
-      }
-      // 990px〜1200px
-      ${min[3] + max[3]} {
-      }
+      max-width: 1280px;
 
       &Wrap {
         display: flex;
+        align-items: center;
         gap: 20px;
         padding-left: 2%;
-        align-items: center;
         margin: 0 auto;
         width: 100%;
         max-width: 1200px;
-
-        // 1px〜519px
-        ${min[0] + max[0]} {
-          overflow: scroll;
-        }
-        // 520px〜767px
-        ${min[1] + max[1]} {
-          overflow: scroll;
-        }
+        height: 60px;
 
         &__item {
-          &--link {
-            font-size: 1rem;
+          &--logo {
+            font-size: 1.5rem;
             color: white;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 3rem;
 
             // 1px〜519px
             ${min[0] + max[0]} {
               font-size: 1rem;
+              margin-right: 1rem;
             }
             // 520px〜767px
             ${min[1] + max[1]} {
-              font-size: 1.4rem;
+              font-size: 1.1rem;
+              margin-right: 1rem;
             }
           }
+
+          &--link {
+            font-size: 1rem;
+            color: var(--white);
+
+            // 1px〜519px
+            ${min[0] + max[0]} {
+              font-size: 0.9rem;
+            }
+            // 520px〜767px
+            ${min[1] + max[1]} {
+              font-size: 1rem;
+            }
+            @media (max-width: 350px) {
+              font-size: 0.8rem;
+            }
+
+            &:hover {
+              transition: 0.3s all ease;
+              font-weight: bold;
+              transform: scale(1.2);
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+      .signInOutBtn {
+        background: rgba(241, 161, 165, 0.9);
+        color: white;
+        font-size: 1rem;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.2s all ease;
+        text-shadow: 0 3px 20px rgba(241, 161, 165, 1);
+        box-shadow: 0 0 4px white;
+        font-weight: bold;
+        transform: translate(0, -2px);
+        margin-left: 8px;
+
+        // 1px〜519px
+        ${min[0] + max[0]} {
+          font-size: 0.8rem;
+          padding: 6px 12px;
+        }
+        // 520px〜767px
+        ${min[1] + max[1]} {
+          font-size: 0.9rem;
+          padding: 8px 16px;
+        }
+        @media (max-width: 350px) {
+          font-size: 0.8rem;
+          padding: 4px 10px;
+        }
+
+        &:hover {
+          transition: 0.2s all ease;
+          color: var(--white);
+          font-weight: bold;
+          transform: translate(0, -4px);
         }
       }
     }
@@ -98,8 +152,15 @@ function Header() {
     //----------------------------------------
     // Nav
     //----------------------------------------
-    .googleIcon .inNav {
-      /* background:rgba(241,161,165, 0.9); */
+    .googleIcon.inNav {
+      width: 40px;
+      border-radius: 50%;
+      filter: "brightness(1.3)";
+
+      // 1px〜519px
+      ${min[0] + max[0]} {
+        width: 36px;
+      }
     }
 
     .googleNameInNav {
@@ -114,11 +175,11 @@ function Header() {
       {/* <!-- Navigation --> */}
       <nav className="nav">
         <ul className="navWrap ">
-          <Link to="/" className="navWrap__item--link" onClick={ChangePageTop}>
+          <Link to="/" className="navWrap__item--logo" onClick={ChangePageTop}>
             <h1>アニメ</h1>
           </Link>
 
-          <li className="navWrap__item">
+          {/* <li className="navWrap__item">
             <Link
               to="/"
               className="navWrap__item--link"
@@ -126,9 +187,9 @@ function Header() {
             >
               HOME
             </Link>
-          </li>
+          </li> */}
 
-          <li className="navWrap__item">
+          {/* <li className="navWrap__item">
             <Link
               to="/contact"
               className="navWrap__item--link"
@@ -136,7 +197,7 @@ function Header() {
             >
               Contact
             </Link>
-          </li>
+          </li> */}
 
           {/*  ===============*/}
           {/* ログイン時に表示 (show when logged in) */}
@@ -150,7 +211,7 @@ function Header() {
                   onClick={ChangePageTop}
                 >
                   <FontAwesomeIcon icon={faFilePen} />
-                  Post
+                  NEWS
                 </Link>
               </li>
 
@@ -203,7 +264,7 @@ function SignInButton() {
   };
   return (
     <button className="signInOutBtn" onClick={signInWithGoogle}>
-      <p>Sign in with Google</p>
+      <p>LOGIN</p>
     </button>
   );
 }
@@ -215,7 +276,7 @@ function SignOutButton() {
   return (
     // firebaseで用意されてるログアウトボタン
     <button className="signInOutBtn" onClick={() => auth.signOut()}>
-      <p>Sign OUT</p>
+      <p>LOG OUT</p>
     </button>
   );
 }
@@ -230,11 +291,6 @@ function UserInfo() {
         {/* ログインしてるユーザーのアイコンを表示 */}
         <img
           className="googleIcon inNav"
-          style={{
-            width: 60,
-            borderRadius: "50%",
-            filter: "brightness(1.3)",
-          }}
           src={auth.currentUser?.photoURL ?? "default_value"} // todo:
           alt="Google Icon"
         />

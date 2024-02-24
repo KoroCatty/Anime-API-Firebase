@@ -28,9 +28,53 @@ interface ApiResponse {
 
 const AnimeApi = ({ search, setSearch }: PropsType) => {
   const animeApiCSS = css`
+    max-width: 1280px;
+    margin: 0 auto;
+
     .animeApi {
+      margin-top: 6rem;
+      position: relative;
+      padding: 12rem 0 4rem 0;
+
+      // 1px〜519px
+      ${min[0] + max[0]} {
+        padding: 6rem 0 4rem 0;
+        margin-top: 3rem;
+      }
+      // 520px〜767px
+      ${min[1] + max[1]} {
+        padding: 8rem 0 4rem 0;
+        margin-top: 4rem;
+      }
+      // 768px 〜 989px
+      ${min[2] + max[2]} {
+        padding: 10rem 0 4rem 0;
+        margin-top: 5rem;
+      }
+
+      &__title {
+        font-size: 10rem;
+        color: rgba(244, 148, 173, 0.1);
+        font-weight: bold;
+        position: absolute;
+        top: -1rem;
+        left: 0;
+
+        // 1px〜519px
+        ${min[0] + max[0]} {
+          font-size: 5rem;
+        }
+        // 520px〜767px
+        ${min[1] + max[1]} {
+          font-size: 6rem;
+        }
+        // 768px 〜 989px
+        ${min[2] + max[2]} {
+          font-size: 8rem;
+        }
+      }
+
       .animes {
-        margin: 0 80px;
         text-align: center;
         padding-bottom: 40px;
 
@@ -64,23 +108,44 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
         input[type="text"] {
           padding-left: 16px;
           font-size: 1.4rem;
+          outline: none;
+          border: none;
+          box-shadow: 0 0 4px var(--font);
+          color: var(--font);
+          letter-spacing: 1px;
+        }
+
+        input[type="text"]::placeholder {
+          color: rgba(241, 161, 165, 0.4);
+          letter-spacing: 1px;
         }
 
         // Button
         #searchBtn {
-          background-color: rgb(255, 255, 255);
-          padding: 10px 20px;
-          border-radius: 4px;
+          color: var(--font_dark);
+          font-weight: bold;
           border: none;
           box-shadow: 0 0 4px white;
+          border-radius: 4px;
           transform: translate(0, -2px);
           margin-left: 8px;
           cursor: pointer;
+          padding: 12px 20px;
+          text-shadow: 0 3px 20px rgba(241, 161, 165, 1);
+          background-color: var(--bg);
+          font-size: 1.1rem;
+
+          &::before {
+            content: "🔍";
+            margin-right: 8px;
+          }
 
           &:hover {
-            transition: 0.6s all ease;
-            color: white;
-            background-color: black;
+            transition: 0.2s all ease;
+            font-weight: bold;
+            transform: translate(0, -4px);
+            transform: scale(1.1);
+            color: var(--font);
           }
         }
 
@@ -94,14 +159,12 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
 
     // Results cards
     #searchResults {
-      max-width: 1080px;
       display: flex;
       justify-content: center;
-      // align-items: center;
       margin: 0 auto;
       flex-wrap: wrap;
       text-align: center;
-      gap: 20px;
+      gap: 2rem;
 
       // 1px〜519px
       ${min[0] + max[0]} {
@@ -112,19 +175,39 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
       }
 
       .cardResult {
-        width: 18%;
+        width: 20%;
+
+        // 1px〜519px
+        ${min[0] + max[0]} {
+          width: 24%;
+        }
+        // 520px〜767px
+        ${min[1] + max[1]} {
+          width: 24%;
+        }
+        // 768px〜989px
+        ${min[2] + max[2]} {
+          width: 30%;
+        }
 
         &__img {
           width: 200px;
-          height: 300px;
+          height: 240px;
+          object-fit: cover;
 
           // 1px〜519px
           ${min[0] + max[0]} {
-            width: auto;
+            width: 90px;
             height: auto;
           }
+
           // 520px〜767px
           ${min[1] + max[1]} {
+            width: 100%;
+            height: 100%;
+          }
+          // 768px〜989px
+          ${min[2] + max[2]} {
           }
         }
 
@@ -191,7 +274,7 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
   return (
     <section css={animeApiCSS}>
       <div className="animeApi">
-        {/* <h2 className="commonTitle">Animes</h2> */}
+        <h2 className="animeApi__title">SEARCH</h2>
 
         <div className="animes">
           <input
@@ -237,7 +320,6 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
               ))}
           </div>
         </div>
-        <hr />
       </div>
     </section>
   );

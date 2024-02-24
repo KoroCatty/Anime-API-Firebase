@@ -12,6 +12,7 @@
   --font: rgb(241,161,165);
   --font_dark: rgb(113,101,96);
   --bg: rgba(241,161,165, 0.05);
+  --border: rgba(113,101,96, 0.4);
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -125,3 +126,4 @@ a {
 /* .slick-slide .slick-active .slick-current {
   width: 70%;
 } */
+

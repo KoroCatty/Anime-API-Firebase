@@ -26,14 +26,25 @@ const newsCSS = css`
       position: absolute;
       top: -1rem;
       left: 0;
+
+      // 1px〜519px
+      ${min[0] + max[0]} {
+        font-size: 6rem;
+      }
+      // 520px〜767px
+      ${min[1] + max[1]} {
+        font-size: 6rem;
+      }
+      // 768px 〜 989px
+      ${min[2] + max[2]} {
+        font-size: 8rem;
+      }
     }
 
     &Contents {
       display: flex;
       align-items: center;
       height: 280px;
-      /* border: 3px solid #3507ff; */
-      /* padding: 1rem; */
 
       span {
         font-weight: bold;
