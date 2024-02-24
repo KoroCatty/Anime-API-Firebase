@@ -40,18 +40,18 @@ const Hero = () => {
         left: 90%;
         transform: translate(-90%, -40%);
         padding: 1rem 1.3rem;
-        background-color: rgba(255, 255, 255, 0.8);
+        /* background-color: rgba(255, 255, 255, 0.7); */
         border-radius: 4px;
 
         // 1px〜519px
         ${min[0] + max[0]} {
           top: 45%;
-          left: 25%;
+          left: 20%;
           padding: 0.7rem 0.7rem;
         }
         // 520px〜767px
         ${min[1] + max[1]} {
-          left: 95%;
+          left: 25%;
           padding: 1rem 1rem;
         }
         // 768px〜989px
@@ -74,16 +74,17 @@ const Hero = () => {
           /* font-family: "Optima", sans-serif; */
           /* font-family: "Roboto", sans-serif; */
           font-size: 1.2rem;
-          color: var(--font);
+          color: white;
           text-align: center;
           font-weight: 700;
           -ms-writing-mode: tb-rl;
           writing-mode: vertical-rl;
-          text-orientation: upright; /* すべて縦方向に表示 */
+          letter-spacing: 0.5rem;
+          /* text-orientation: upright; すべて縦方向に表示 */
 
           // 1px〜519px
           ${min[0] + max[0]} {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
           }
           // 520px〜767px
           ${min[1] + max[1]} {
@@ -97,7 +98,7 @@ const Hero = () => {
           ${min[3] + max[3]} {
           }
           @media screen and (min-width: 400px) and (max-width: 500px) {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
           }
 
           @media screen and (max-width: 350px) {

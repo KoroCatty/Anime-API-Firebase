@@ -214,6 +214,8 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
         &__title {
           text-align: center;
           word-wrap: normal;
+          color: var(--font_dark);
+          margin-top: 0.4rem;
         }
       }
     }

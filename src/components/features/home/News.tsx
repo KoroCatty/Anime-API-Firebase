@@ -50,6 +50,7 @@ const newsCSS = css`
         font-weight: bold;
         margin: 0.5rem 0;
         display: block;
+        font-size: 0.9rem;
       }
 
       // 1px〜519px
@@ -78,6 +79,7 @@ const newsCSS = css`
       &__info {
         width: 8%;
         display: flex;
+        margin: 1rem 0;
 
         // 1px〜519px
         ${min[0] + max[0]} {
