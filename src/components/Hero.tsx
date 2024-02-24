@@ -7,25 +7,26 @@ import { min, max } from "../styles/mediaQuery";
 
 const Hero = () => {
   const heroCSS = css`
+    background-image: url("/Images/hero_clear.png");
+    background-size: cover;
+    height: 90vh;
+    background-position: bottom;
+    position: relative;
 
     .hero {
-      position: relative;
-
       &__box {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         padding: 1rem 2rem;
-          background-color: rgba(255, 255, 255, 0.8);
-          border-radius: 0 0 40px 40px;
+        background-color: rgba(255, 255, 255, 0.8);
 
         h1 {
           font-size: 3rem;
           color: var(--font);
           text-align: center;
           margin-bottom: 20px;
-
         }
 
         /* p {
@@ -35,15 +36,14 @@ const Hero = () => {
         } */
       }
 
-      &__img {
+      /* &__img {
           width: 100%;
           height: 80vh;
           object-fit: cover;
           top: 0;
           left: 0;
           z-index: -1;
-          border-radius: 0 0 40px 40px;
-        }
+        } */
     }
 
     // 1px〜519px
@@ -62,15 +62,14 @@ const Hero = () => {
   return (
     <section css={heroCSS}>
       <div className="hero">
-
         <div className="hero__box">
           <h1>Find your favorite anime</h1>
           {/* <p>Search for your favorite anime</p> */}
         </div>
 
-        <img className="hero__img" src="/Images/test.jpg" alt="" />
+        {/* <img className="hero__img" src="/Images/hero_clear.png" alt="Hero image" /> */}
       </div>
-      
+
       <SakuraParticles />
     </section>
   );

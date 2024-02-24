@@ -1,6 +1,5 @@
 /* COLOR SHEET: https://tailwindcss.com/docs/customizing-colors */
 :root {
-  /* --primary: #1e1e1e; */
   --primary: rgb(250,251,244);
   --complementary: #111827; /* TAILWIND: GRAY 900 */
   --complementarySkew: #212529
@@ -11,6 +10,7 @@
   --error: #dc2626; /* TAILWIND: RED 600 */
 	--white: rgba(250, 250, 249, 1);
   --font: rgb(241,161,165);
+  --font_dark: rgb(113,101,96);
   --bg: rgba(241,161,165, 0.05);
 }
 
@@ -71,6 +71,7 @@ body {
 	overflow-x: hidden;
   background-color: var(--bg);
   background: url("/Images/bg_cover.png");
+  color: var(--font_dark);
 }
 
 a {
@@ -119,3 +120,8 @@ a {
     background-position-x: -110%;
   }
 }
+
+
+/* .slick-slide .slick-active .slick-current {
+  width: 70%;
+} */

@@ -32,18 +32,17 @@ function ChangePageTop() {
 
 function Header() {
   const headerCSS = css`
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      max-width: 1280px;
-      width: 100%;
-      
-      .nav {
-        /* background-color: rgba(0, 0, 0, 0.6); */
-        margin: 0 auto;
-  
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    max-width: 1280px;
+    width: 100%;
+
+    .nav {
+      /* background-color: rgba(0, 0, 0, 0.6); */
+      margin: 0 auto;
 
       // 1px〜519px
       ${min[0] + max[0]} {
@@ -67,7 +66,7 @@ function Header() {
         align-items: center;
         margin: 0 auto;
         width: 100%;
-      max-width: 1200px;
+        max-width: 1200px;
 
         // 1px〜519px
         ${min[0] + max[0]} {
@@ -82,7 +81,6 @@ function Header() {
           &--link {
             font-size: 1rem;
             color: white;
-            
 
             // 1px〜519px
             ${min[0] + max[0]} {
@@ -101,6 +99,7 @@ function Header() {
     // Nav
     //----------------------------------------
     .googleIcon .inNav {
+      /* background:rgba(241,161,165, 0.9); */
     }
 
     .googleNameInNav {
@@ -227,7 +226,7 @@ function SignOutButton() {
 function UserInfo() {
   return (
     <>
-      <div style={{background:"rgba(241,161,165, 0.9)"}}>
+      <div>
         {/* ログインしてるユーザーのアイコンを表示 */}
         <img
           className="googleIcon inNav"
@@ -235,7 +234,6 @@ function UserInfo() {
             width: 60,
             borderRadius: "50%",
             filter: "brightness(1.3)",
-
           }}
           src={auth.currentUser?.photoURL ?? "default_value"} // todo:
           alt="Google Icon"

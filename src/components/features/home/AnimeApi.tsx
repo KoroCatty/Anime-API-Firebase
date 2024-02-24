@@ -29,8 +29,6 @@ interface ApiResponse {
 const AnimeApi = ({ search, setSearch }: PropsType) => {
   const animeApiCSS = css`
     .animeApi {
-
-
       .animes {
         margin: 0 80px;
         text-align: center;

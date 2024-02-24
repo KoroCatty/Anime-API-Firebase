@@ -1,28 +1,45 @@
+import { useEffect, useState } from "react";
+
 // FBのデータを表示するファイル
 import { auth, db } from "../../../service/firebase";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
-
 // DBのデータを順番通りに並べるモジュール
 // to sort the data in DB in order
 import { query, orderBy } from "firebase/firestore";
-import { Link } from "react-router-dom";
+
+// component
+import SliderNews from "./SliderNews";
 
 import { css } from "@emotion/react";
 import { min, max } from "../../../styles/mediaQuery";
 const newsCSS = css`
   .news {
-    max-width: 1080px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 100px 0;
+    padding: 100px 1rem;
+    position: relative;
+
+    &__title {
+      font-size: 10rem;
+      color: rgba(244, 148, 173, 0.1);
+      font-weight: bold;
+      position: absolute;
+      top: -1rem;
+      left: 0;
+    }
 
     &Contents {
-      padding-bottom: 20px;
-      padding: 0 8px 20px 8px;
-      border-bottom: 1px dashed white;
-      margin-top: 20px;
       display: flex;
       align-items: center;
+      height: 280px;
+      /* border: 3px solid #3507ff; */
+      /* padding: 1rem; */
+
+      span {
+        font-weight: bold;
+        margin: 0.5rem 0;
+        display: block;
+      }
 
       // 1px〜519px
       ${min[0] + max[0]} {
@@ -49,6 +66,7 @@ const newsCSS = css`
 
       &__info {
         width: 8%;
+        display: flex;
 
         // 1px〜519px
         ${min[0] + max[0]} {
@@ -73,29 +91,29 @@ const newsCSS = css`
         margin-left: 4px;
         margin-bottom: -10px;
         padding-top: 10px;
-        line-height: 1.4;
       }
     }
     .newsContents__body {
-      &--created {
-        color: red;
-      }
       &--title {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
+        font-weight: bold;
         margin: 4px 0 8px 0;
         line-height: 1.2;
+        color: var(--font);
       }
+
       &--content {
         font-size: 1.1rem;
         line-height: 1.5;
         padding-right: 4px;
+        height: 120px;
       }
     }
 
     .newsPostBtns {
       display: flex;
-      flex-direction: column;
-      gap: 30px 0;
+      align-items: center;
+      gap: 0 1rem;
       text-align: center;
 
       // 1px〜519px
@@ -110,8 +128,9 @@ const newsCSS = css`
 
       // each  button
       &__edit {
+        width: 40%;
         background-color: rgb(60, 60, 60);
-        padding: 20px 10px;
+        padding: 10px 4px;
         cursor: pointer;
         color: white;
 
@@ -124,8 +143,6 @@ const newsCSS = css`
 
       &__edit.delete {
         background-color: rgb(176, 60, 60);
-        padding: 20px 10px;
-        cursor: pointer;
       }
     }
   }
@@ -162,9 +179,6 @@ type PostItem = {
 };
 
 function News() {
-  // ======================================
-  // useState
-  // ======================================
   // map()で回したやつが返ってくるので、arrayを用意
   const [postList, setPostList] = useState<PostItem[]>([]);
 
@@ -187,19 +201,10 @@ function News() {
 
       // データが色々返ってきてややこしいので、 docの中のdataをループで取得する
       // fbでは docに対して data()という便利なものが使える(深い階層でも簡単に取得)
-      //  ,id: dataとすることで、属性を追加できる
-      // to get the data in doc (* koro is my cat's name)
-      //  console.log(
-      //   data.docs.map((item) => ({ ...item.data(), id: item.id }))
-      // );
-
-      // こうすることで、 useStateの、postListの中にこの取り出したデータが入る
-      // ここのdocsはfb特別のもの。この中を掘り下げていくと欲しいデータが入ってる
-      // to set the data in useState
-
+      // ここのdocsはfb特別のもの。
       setPostList(
         data.docs.map((item) => ({
-          id: item.id,
+          id: item.id, // 属性を追加できる
           title: item.data().title,
           postsText: item.data().postsText,
           postCreated: item.data().postCreated,
@@ -236,71 +241,14 @@ function News() {
   // ======================================
   return (
     <section css={newsCSS}>
-      <div className="news fadeIn2">
-        <h2 className="commonTitle">News Posts</h2>
-        {postList.map((millie) => {
-          return (
-            // mille.id => loopedId Delete functionで使う。
-            <div className="newsContents" key={millie.id}>
-              {/* User's information */}
-              <div className="newsContents__info">
-                {/* user's image Icon */}
-                <img
-                  className="googleIcon"
-                  style={{
-                    width: 60,
-                    borderRadius: "50%",
-                  }}
-                  // NEWSを残したユーザーのアイコンを表示
-                  src={millie.author.iconImg}
-                  alt="Google Icon"
-                />
-
-                {/* user name */}
-                <h3 id="news" className="newsContentsWrap__userName">
-                  {millie.author.username}
-                </h3>
-              </div>
-
-              <div className="newsContents__body">
-                {/* 投稿日時 */}
-                <div className="newsContents__body--created">
-                  {millie.postCreated}
-                </div>
-
-                {/* Title */}
-                <h1 className="newsContents__body--title">{millie.title}</h1>
-
-                {/* Content */}
-                <div className="newsContents__body--content">
-                  {millie.postsText}
-                </div>
-              </div>
-
-              {/* Delete Button 投稿のID 3E〜と今現在ログインしているアカウントのIDが同じならボタンを出力*/}
-              {millie.author.id === auth.currentUser?.uid && (
-                <div className="newsPostBtns">
-                  {/* Edit Button */}
-                  <Link
-                    to={`/editpost/${millie.id}`}
-                    className="newsPostBtns__edit"
-                    onClick={() => ChangePageTop()}
-                  >
-                    EDIT
-                  </Link>
-
-                  {/* Delete Button */}
-                  <button
-                    className="newsPostBtns__edit delete"
-                    onClick={() => handleDelete(millie.id)}
-                  >
-                    DELETE
-                  </button>
-                </div>
-              )}
-            </div>
-          );
-        })}
+      <div className="news">
+        <h2 className="news__title">NEWS</h2>
+        <SliderNews
+          postList={postList}
+          auth={auth}
+          ChangePageTop={ChangePageTop}
+          handleDelete={handleDelete}
+        />
       </div>
     </section>
   );
