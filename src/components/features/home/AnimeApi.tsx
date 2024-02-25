@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { css } from "@emotion/react";
 import { min, max } from "../../../styles/mediaQuery";
 
+import Pagination from "./Pagination";
+
 // TYPE
 type PropsType = {
   search: string;
@@ -142,8 +144,8 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
 
           // 1px〜519px
           ${min[0] + max[0]} {
-           width: 50%;
-           margin-bottom: 2rem;
+            width: 50%;
+            margin-bottom: 2rem;
           }
 
           &::before {
@@ -161,8 +163,8 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
         }
 
         &__error {
-          font-size: 3rem;
-          color: red;
+          font-size: 2rem;
+          color: var(--font);
           font-weight: 900;
         }
       }
@@ -205,6 +207,8 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
           width: 200px;
           height: 240px;
           object-fit: cover;
+          border: 1px solid var(--font);
+          border-radius: 4px;
 
           // 1px〜519px
           ${min[0] + max[0]} {
@@ -220,6 +224,14 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
           // 768px〜989px
           ${min[2] + max[2]} {
           }
+
+          &:hover {
+            @media screen and (min-width: 768px) {
+              transition: 0.3s all ease;
+              transform: scale(1.1);
+              filter: brightness(0.8);
+            }
+          }
         }
 
         &__title {
@@ -232,21 +244,22 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
     }
   `;
 
-  // const [results, setResults] = useState(); // object
+  // page state
+  const [pageNumber, setPageNumber] = useState(1);
+
   const [results, setResults] = useState<ApiResponse | null>(null);
 
-  // const animeApi = "https://api.jikan.moe/v4/anime?limit=20"; // 25以上にするとエラー
-  const animeApi = "https://api.jikan.moe/v4/anime?page=3";
+  // End Point
+  const animeApi = `https://api.jikan.moe/v4/anime?page=${pageNumber}`; // &limit=20
 
   // ==========================================================
   // Get API Data when this page loaded
   // ==========================================================
-
   useEffect(() => {
     // execute the function below when this page loaded
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [animeApi]);
 
   // ==================================
   // Get API Data by Clicking Button
@@ -274,6 +287,8 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
     // useStateにuserがタイプした値をセット(入力を見える様にする)
     // to set the value user typed to useState (to make it visible)
     setSearch(e.target.value); // value user typed saves to useState
+
+    setPageNumber(1);
   };
 
   // ==================================
@@ -332,6 +347,13 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
                 </div>
               ))}
           </div>
+          {/* !!results converts results to a boolean. It'll be true if results is not null */}
+          {/*  results.data.length > 0 checks if there are any items in the data array. */}
+          <Pagination
+            results={!!results && results.data.length > 0}
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+          />
         </div>
       </div>
     </section>

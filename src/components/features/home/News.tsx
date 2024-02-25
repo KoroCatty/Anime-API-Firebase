@@ -149,20 +149,26 @@ const newsCSS = css`
       // each  button
       &__edit {
         width: 40%;
-        background-color: rgb(60, 60, 60);
+        background-color: var(--font_dark);
         padding: 10px 4px;
         cursor: pointer;
         color: white;
+        border: 1px solid var(--font);
+        border-radius: 8px;
 
         &:hover {
           transition: all 0.6s ease;
           transform: translate(0, 4px);
-          filter: brightness(1.4);
+          opacity: 0.8;
         }
       }
 
       &__edit.delete {
-        background-color: rgb(176, 60, 60);
+        background-color: var(--font);
+
+        &:hover {
+          background-color: var(--error);
+        }
       }
     }
   }
