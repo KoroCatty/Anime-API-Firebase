@@ -80,56 +80,6 @@ body {
 
 a {
 	text-decoration: none;
-
 }
 
-/* Common Title */
-.commonTitle {
-  background-image: linear-gradient(
-    to left,
-    #fff20d 0,
-    #ff790d 14.28%,
-    #ff0d1a 28.56%,
-    #f20dff 42.85%,
-    #0d93ff 57.14%,
-    #0dfff2 71.42%,
-    #93ff0d 85.71%,
-    #fff20d 100%
-  );
-  text-align: center;
-  font-size: 3.2rem;
-  font-weight: 600;
-  padding: 40px 0;
-
-  background-size: 1000%;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-animation: gra 10s linear infinite;
-  animation: gra 10s linear infinite;
-
-  @include mq(s) {
-    font-size: 32px;
-    padding-bottom: 20px;
-  }
-
-  @include mq(m) {
-    font-size: 40px;
-    padding-bottom: 40px;
-  }
-}
-
-@keyframes gra {
-  to {
-    background-position-x: -110%;
-  }
-}
-
-
-/* .slick-slide.slick-active.slick-current {
-  
-  background-color: red;
-  color: green;
-  width: 300px;
-} */
 

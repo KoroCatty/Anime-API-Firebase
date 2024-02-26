@@ -3,17 +3,11 @@ import { min, max } from "../../styles/mediaQuery";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  // faHouse,
-  faFilePen,
-  // faArrowRightToBracket,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFilePen } from "@fortawesome/free-solid-svg-icons";
 
 // firebaseから輸入 (ボタンでログイン・ログアウトできるようにするもの)
-// to enable login / logout
 import { signInWithPopup } from "firebase/auth";
 
-// ===========================================================
 // ログインしてるか見極めるために必要 + これにuseState()もいる
 // to check if the user is logged in or not
 import { auth, provider } from "../../service/firebase";
@@ -21,8 +15,6 @@ import { auth, provider } from "../../service/firebase";
 // firebaseのフックス(ログイン時でページを変えるstateをコントロールする)
 // to control the state of the page when logged in
 import { useAuthState } from "react-firebase-hooks/auth";
-// ===========================================================
-
 import { Link } from "react-router-dom";
 
 // Go to the top
@@ -81,6 +73,7 @@ function Header() {
             font-weight: bold;
             text-decoration: none;
             margin-right: 3rem;
+            text-shadow: 0 3px 20px #ff7d83;
 
             // 1px〜519px
             ${min[0] + max[0]} {
@@ -92,11 +85,18 @@ function Header() {
               font-size: 1.1rem;
               margin-right: 1rem;
             }
+
+            &:hover {
+              transition: 0.3s all ease;
+              transform: scale(1.2);
+            }
           }
 
           &--link {
             font-size: 1rem;
             color: var(--white);
+            font-weight: bold;
+            text-shadow: 0 3px 20px #ff7d83;
 
             // 1px〜519px
             ${min[0] + max[0]} {
@@ -151,10 +151,11 @@ function Header() {
         }
 
         &:hover {
-          transition: 0.2s all ease;
-          color: var(--white);
-          font-weight: bold;
-          transform: translate(0, -4px);
+          @media screen and (min-width: 768px) {
+            transition: 0.2s all ease;
+            opacity: 0.7;
+            transform: translate(0, -4px);
+          }
         }
       }
     }
@@ -185,29 +186,15 @@ function Header() {
       {/* <!-- Navigation --> */}
       <nav className="nav">
         <ul className="navWrap ">
-          <Link to="/" className="navWrap__item--logo" onClick={ChangePageTop}>
+          <Link
+            to="/"
+            className="navWrap__item--logo"
+            onClick={() => {
+              ChangePageTop();
+            }}
+          >
             <h1>アニメ</h1>
           </Link>
-
-          {/* <li className="navWrap__item">
-            <Link
-              to="/"
-              className="navWrap__item--link"
-              onClick={ChangePageTop}
-            >
-              HOME
-            </Link>
-          </li> */}
-
-          {/* <li className="navWrap__item">
-            <Link
-              to="/contact"
-              className="navWrap__item--link"
-              onClick={ChangePageTop}
-            >
-              Contact
-            </Link>
-          </li> */}
 
           {/*  ===============*/}
           {/* ログイン時に表示 (show when logged in) */}
@@ -301,15 +288,9 @@ function UserInfo() {
         {/* ログインしてるユーザーのアイコンを表示 */}
         <img
           className="googleIcon inNav"
-          src={auth.currentUser?.photoURL ?? "default_value"} // todo:
+          src={auth.currentUser?.photoURL ?? "/Images/default_icon.png"}
           alt="Google Icon"
         />
-        {/* <p
-          className="googleNameInNav"
-          style={{ textAlign: "center", fontSize: "1rem" }}
-        >
-          {auth.currentUser?.displayName}
-        </p> */}
       </div>
     </>
   );

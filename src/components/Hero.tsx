@@ -3,8 +3,6 @@ import SakuraParticles from "./common/SakuraParticles";
 import { css } from "@emotion/react";
 import { min, max } from "../styles/mediaQuery";
 
-// import Bg3d from "./common/Bg3d";
-
 const Hero = () => {
   const heroCSS = css`
     background-image: url("/Images/hero_clear.png");
@@ -40,7 +38,6 @@ const Hero = () => {
         left: 22%;
         transform: translate(-90%, -40%);
         padding: 1rem 1.3rem;
-        /* background-color: rgba(255, 255, 255, 0.7); */
         border-radius: 4px;
 
         // 1px〜519px

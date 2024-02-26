@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 
 // components
 import Layout from "./components/layout/Layout";
-import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Details from "./pages/Details";
 import CreatePost from "./pages/CreatePost";
@@ -30,7 +29,6 @@ function App() {
               index
               element={<Home search={search} setSearch={setSearch} />}
             />
-            <Route path="contact" element={<Contact />} />
             <Route path="/:id" element={<Details />} />
             <Route path="/createpost" element={<CreatePost />} />
             <Route path="/editpost/:id" element={<EditPost />} />

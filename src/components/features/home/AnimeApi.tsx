@@ -285,7 +285,6 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
       console.log(err);
     }
   }
-  // getData();
 
   // ==================================
   // Change the state by being changed in an input
@@ -296,11 +295,8 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
     setPageNumber(1);
   };
 
-  // ==================================
-  // Change the state by Clicking btn. (e) has a value user typed
-  // ==================================
-  const handleClick = () => {
-    console.log("click");
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     getData();
   };
 
@@ -310,21 +306,22 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
         <h2 className="animeApi__title">SEARCH</h2>
 
         <div className="animes">
-          <input
-            className="animes__search"
-            type="text"
-            id="search"
-            name="search"
-            // (e) には入力された値が入っている
-            onChange={(e) => handleChange(e)}
-            // defaultValue={(window.localStorage.getItem("search"))}
-            value={search}
-            placeholder="Type anime name"
-          />
+          <form onSubmit={handleSubmit}>
+            <input
+              className="animes__search"
+              type="text"
+              id="search"
+              name="search"
+              onChange={(e) => handleChange(e)}
+              // defaultValue={(window.localStorage.getItem("search"))}
+              value={search}
+              placeholder="Type anime name"
+            />
 
-          <button id="searchBtn" onClick={() => handleClick()}>
-            Search
-          </button>
+            <button id="searchBtn" type="submit">
+              Search
+            </button>
+          </form>
 
           {/* if there's no data found, print out error message */}
           {results && results.data.length > 0 ? (

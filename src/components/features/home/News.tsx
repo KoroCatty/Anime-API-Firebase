@@ -45,12 +45,21 @@ const newsCSS = css`
       display: flex;
       align-items: center;
       height: 290px;
-      /* border: 1px solid var(--font); */
       border-radius: 8px;
       background-color: var(--bg);
       box-shadow: 0 2px 1px var(--font);
       width: 90% !important;
       padding: 0.8rem;
+      border: 1px solid transparent; /* 通常時は透明なborderを設定 */
+      cursor: grabbing;
+
+      &:hover {
+        @media screen and (min-width: 768px) {
+          opacity: 0.9;
+          transition: 0.3s all ease;
+          border: 0.5px solid var(--font);
+        }
+      }
 
       span {
         font-weight: bold;

@@ -3,93 +3,20 @@ import { useEffect, useState } from "react";
 // FBのデータを表示するファイル
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 // ===========================================================
-// ログインしてるか見極めるために必要 + これにuseState()もいる
+// ログインしてるか見極めるために必要
 // to check if the user is logged in
 import { db } from "../service/firebase";
-// firebaseのフックス(ログイン時でページを変えるstateをコントロールする)
-// import { useAuthState } from "react-firebase-hooks/auth";
-// ===========================================================
 
-// useParamsフックを使ってidを取得することが可能 (飛ばされた先で必要)
+// useParamsフックを使ってidを取得することが可能
 // you can get the id using the useParams hook
 import { useParams } from "react-router-dom";
 
 // リダイレクトできる
 import { useNavigate } from "react-router-dom";
 
-// Emotion sass in component
-import { css } from "@emotion/react";
-import { min, max } from "../styles/mediaQuery";
-// ===========================================================
-// SCSS Start
-// ===========================================================
-const createPostScss = css`
-  .inputPost {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 40px;
+// CSS FIle
+import { crudPageCSS } from "../styles/crudPageCSS";
 
-    // 1px〜480px
-    ${min[0] + max[0]} {
-      padding: 0 20px;
-    }
-    // 481px〜768px
-    ${min[1] + max[1]} {
-    }
-
-    &__title {
-      font-size: 2rem;
-      margin-bottom: 8px;
-    }
-
-    &__input--small {
-      height: 60px;
-    }
-
-    // フォーム内の文字
-    input[type="text"],
-    textarea {
-      font-size: 1.4rem;
-      letter-spacing: 1.4px;
-
-      // フォーカス時
-      &:focus {
-        outline: 4px solid blue;
-        box-shadow: 2px 2px 18px white;
-      }
-
-      // 1px〜480px
-      ${min[0] + max[0]} {
-        font-size: 1.2rem;
-      }
-    }
-  }
-
-  .inputPost.second {
-    margin-top: 40px;
-  }
-
-  .postButton {
-    margin: 0 auto;
-    display: block;
-    width: fit-content;
-    padding: 20px 30px;
-    margin-top: 52px;
-    color: white;
-    background-color: black;
-    cursor: pointer;
-
-    &:hover {
-      transition: all 0.4s ease;
-      transform: translate(0, 4px);
-      /* color: black; */
-      background-color: #2842d3;
-    }
-  }
-`;
-// ===========================================================
-// SCSS End
-// ===========================================================
 function EditPost() {
   // useState
   const [title, setTitle] = useState("");
@@ -115,10 +42,6 @@ function EditPost() {
       // not only get 1 document, but also get all documents so you need to use getDocs()
       const gotOnePost = await getDoc(q);
 
-      // console.log(gotOnePost);
-      // console.log(gotOnePost.id);
-      // console.log(aaa.title);
-
       // fbでは data()メソッドで取り出さないとjsで使えない
       const aaa = gotOnePost.data();
 
@@ -126,9 +49,6 @@ function EditPost() {
         setTitle(aaa.title);
         setPostText(aaa.postsText);
       }
-
-      // console.log(aaa.title);
-      // console.log(aaa.postsText);
     };
     getPosts();
     // eslint-disable-next-line
@@ -185,9 +105,9 @@ function EditPost() {
 
   return (
     <>
-      <main css={createPostScss}>
+      <main css={crudPageCSS}>
         <div className="postContainer">
-          <h2 className="commonTitle API">Edit Post</h2>
+          <h1 className="title">EDIT POST</h1>
 
           <div className="inputPost">
             <div className="inputPost__title">Title</div>
@@ -208,8 +128,7 @@ function EditPost() {
               // DB内テキストを表示
               defaultValue={postText}
               onChange={(e) => setPostText(e.target.value)}
-              cols={30}
-              rows={30}
+              rows={10}
               placeholder="body"
             ></textarea>
           </div>
@@ -220,8 +139,6 @@ function EditPost() {
           </button>
         </div>
       </main>
-
-      <hr />
     </>
   );
 }

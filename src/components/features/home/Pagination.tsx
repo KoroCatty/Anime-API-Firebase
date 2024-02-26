@@ -24,6 +24,8 @@ const Pagination = ({
 }: PropsType) => {
   // pagination button disabled state
   const [isDisabled, setIsDisabled] = useState(false);
+  // 初期読み込み判定用の状態を追加
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   const paginationCSS = css`
     margin-top: 2rem;
@@ -78,13 +80,27 @@ const Pagination = ({
     }
   `;
 
+  // 初期読み込みでない場合にのみスクロールを実行
   useEffect(() => {
-    window.scroll({
-      top: 1300,
-      left: 0,
-      behavior: "smooth",
-    });
+    if (!isInitialLoad) {
+      window.scroll({
+        top: 1300,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+    // スクロール実行後は、isInitialLoadをfalseに設定
+    setIsInitialLoad(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber]);
+
+  // useEffect(() => {
+  //   window.scroll({
+  //     top: 1300,
+  //     left: 0,
+  //     behavior: "smooth",
+  //   });
+  // }, [pageNumber]);
 
   // 1秒後にdisabled状態を更新(when the last page)
   useEffect(() => {
@@ -95,6 +111,7 @@ const Pagination = ({
     // コンポーネントがアンマウントされたときにタイマーをクリア
     return () => clearTimeout(timer);
   }, [resultsData?.pagination.has_next_page]);
+  // }, [resultsData?.pagination.has_next_page]);
 
   return (
     <div css={paginationCSS}>
