@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 // FBのデータを表示するファイル
 import { auth, db } from "../../../service/firebase";
@@ -153,8 +153,8 @@ const newsCSS = css`
         padding: 10px 4px;
         cursor: pointer;
         color: white;
-        border: 1px solid var(--font);
         border-radius: 8px;
+        border: none;
 
         &:hover {
           transition: all 0.6s ease;
@@ -188,10 +188,9 @@ const newsCSS = css`
 `;
 // ===========================================================
 // Go to the top
-function ChangePageTop() {
-  window.scroll(0, 0); // ページの一番上に移動
-}
-
+// function ChangePageTop() {
+//   window.scroll(0, 0); // ページの一番上に移動
+// }
 type PostItem = {
   id: string;
   title: string;
@@ -205,44 +204,44 @@ type PostItem = {
 };
 
 function News() {
+  // Go to the top
+  const ChangePageTop = useCallback(() => {
+    window.scroll(0, 0);
+  }, []);
+
   // map()で回したやつが返ってくるので、arrayを用意
   const [postList, setPostList] = useState<PostItem[]>([]);
 
-  // ========================================================
-  // useEffect
-  // ページ読み込み時に一度だけ発火して欲しいので useEffect()を使う。
-  // useEffectの中で asyncを使う場合,もう一度関数を作らなあかん
-  // ========================================================
   useEffect(() => {
-    const getPosts = async () => {
-      //DB内の timeStamp を降順に並べる（階層に注意）
-      // to sort the timeStamp in DB in descending order
-      const q = query(collection(db, "news"), orderBy("timeStamp", "desc"));
+    try {
+      const getPosts = async () => {
+        //DB内の timeStamp を降順に並べる（階層に注意）
+        // to sort the timeStamp in DB in descending order
+        const q = query(collection(db, "news"), orderBy("timeStamp", "desc"));
 
-      //上記のコードをこれに格納
-      const data = await getDocs(q);
+        //上記のコードをこれに格納
+        const data = await getDocs(q);
 
-      // fb内の全てのDOC、コレクションの中のdbのnews と命名した全てを取得する
-      // const data = await getDocs(collection(db, "news"));
+        // fb内の全てのDOC、コレクションの中のdbのnews と命名した全てを取得する
+        // const data = await getDocs(collection(db, "news"));
 
-      // データが色々返ってきてややこしいので、 docの中のdataをループで取得する
-      // fbでは docに対して data()という便利なものが使える(深い階層でも簡単に取得)
-      // ここのdocsはfb特別のもの。
-      setPostList(
-        data.docs.map((item) => ({
-          id: item.id, // 属性を追加できる
-          title: item.data().title,
-          postsText: item.data().postsText,
-          postCreated: item.data().postCreated,
-          author: item.data().author,
-        })),
-      );
-
-      //  setPostList(
-      //   data.docs.map((item) => ({ ...item.data(), id: item.id }))
-      // );
-    };
-    getPosts();
+        // データが色々返ってきてややこしいので、 docの中のdataをループで取得する
+        // fbでは docに対して data()という便利なものが使える(深い階層でも簡単に取得)
+        // ここのdocsはfb特別のもの。
+        setPostList(
+          data.docs.map((item) => ({
+            id: item.id, // 属性を追加できる
+            title: item.data().title,
+            postsText: item.data().postsText,
+            postCreated: item.data().postCreated,
+            author: item.data().author,
+          })),
+        );
+      };
+      getPosts();
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   // ======================================

@@ -14,7 +14,7 @@ type PropsType = {
   setSearch: (search: string) => void;
 };
 
-interface Anime {
+type Anime = {
   mal_id: number;
   title: string;
   images: {
@@ -22,11 +22,16 @@ interface Anime {
       image_url: string;
     };
   };
-}
+};
 
-interface ApiResponse {
+type PaginationType = {
+  has_next_page: boolean;
+};
+
+type ApiResponse = {
   data: Anime[];
-}
+  pagination: PaginationType;
+};
 
 const AnimeApi = ({ search, setSearch }: PropsType) => {
   const animeApiCSS = css`
@@ -182,6 +187,7 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
       // 1px〜519px
       ${min[0] + max[0]} {
         width: 100%;
+        gap: 2rem 0.5rem;
       }
       // 520px〜767px
       ${min[1] + max[1]} {
@@ -192,7 +198,7 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
 
         // 1px〜519px
         ${min[0] + max[0]} {
-          width: 24%;
+          width: 30%;
         }
         // 520px〜767px
         ${min[1] + max[1]} {
@@ -207,19 +213,19 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
           width: 200px;
           height: 240px;
           object-fit: cover;
-          border: 1px solid var(--font);
           border-radius: 4px;
+          box-shadow: 0 0 4px var(--font);
 
           // 1px〜519px
           ${min[0] + max[0]} {
-            width: 90px;
-            height: auto;
+            width: 100%;
+            height: 150px;
           }
 
           // 520px〜767px
           ${min[1] + max[1]} {
             width: 100%;
-            height: 100%;
+            height: 220px;
           }
           // 768px〜989px
           ${min[2] + max[2]} {
@@ -239,6 +245,11 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
           word-wrap: normal;
           color: var(--font_dark);
           margin-top: 0.4rem;
+
+          // 1px〜519px
+          ${min[0] + max[0]} {
+            font-size: 0.85rem;
+          }
         }
       }
     }
@@ -253,10 +264,9 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
   const animeApi = `https://api.jikan.moe/v4/anime?page=${pageNumber}`; // &limit=20
 
   // ==========================================================
-  // Get API Data when this page loaded
+  // Get API Data
   // ==========================================================
   useEffect(() => {
-    // execute the function below when this page loaded
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animeApi]);
@@ -268,7 +278,6 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
     try {
       const res = await fetch(`${animeApi}&q=${search}`);
       const json = await res.json();
-      console.log(json);
       setResults(json);
 
       // displayCharacters(json.data);
@@ -282,12 +291,8 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
   // Change the state by being changed in an input
   // ==================================
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.value);
-
-    // useStateにuserがタイプした値をセット(入力を見える様にする)
     // to set the value user typed to useState (to make it visible)
     setSearch(e.target.value); // value user typed saves to useState
-
     setPageNumber(1);
   };
 
@@ -317,9 +322,7 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
             placeholder="Type anime name"
           />
 
-          {/* fire the function above with the value? */}
           <button id="searchBtn" onClick={() => handleClick()}>
-            {/* <button id="searchBtn" onClick={(e) => handleClick(e)}> */}
             Search
           </button>
 
@@ -343,7 +346,12 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
                       className="cardResult__img"
                     />
                   </Link>
-                  <p className="cardResult__title">{anime.title}</p>
+                  {/* If there's more than 40, add "..." */}
+                  <p className="cardResult__title">
+                    {anime.title.length > 40
+                      ? anime.title.substring(0, 40) + "..."
+                      : anime.title.substring(0, 40)}
+                  </p>
                 </div>
               ))}
           </div>
@@ -351,6 +359,7 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
           {/*  results.data.length > 0 checks if there are any items in the data array. */}
           <Pagination
             results={!!results && results.data.length > 0}
+            resultsData={results}
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}
           />

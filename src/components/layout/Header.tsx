@@ -38,7 +38,6 @@ function Header() {
     transform: translateX(-50%);
     z-index: 1;
     width: 100%;
-    /* height: 80px; */
 
     &::before {
       content: "";
@@ -47,7 +46,7 @@ function Header() {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(241, 161, 165, 0.2);
+      background: rgba(241, 161, 165, 0.3);
       z-index: -1;
     }
 
@@ -63,12 +62,17 @@ function Header() {
       &Wrap {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 1rem;
         padding-left: 2%;
         margin: 0 auto;
         width: 100%;
         max-width: 1200px;
         height: 60px;
+
+        // 1px〜519px
+        ${min[0] + max[0]} {
+          gap: 0.8rem;
+        }
 
         &__item {
           &--logo {
@@ -103,7 +107,7 @@ function Header() {
               font-size: 1rem;
             }
             @media (max-width: 350px) {
-              font-size: 0.8rem;
+              font-size: 0.7rem;
             }
 
             &:hover {
@@ -142,7 +146,8 @@ function Header() {
         }
         @media (max-width: 350px) {
           font-size: 0.8rem;
-          padding: 4px 10px;
+          padding: 4px 6px;
+          margin-left: 0;
         }
 
         &:hover {

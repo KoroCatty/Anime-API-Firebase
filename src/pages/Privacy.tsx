@@ -5,12 +5,12 @@ function Privacy() {
   const privacy = css`
     max-width: 800px;
     margin: 0 auto;
-    padding: 60px 28px;
+    padding: 4rem 2rem;
+    margin-top: 4rem;
 
     // 1px〜480px
     ${min[0] + max[0]} {
       padding: 28px 12px;
-      margin: 0 auto 160px auto;
     }
 
     .privacy {

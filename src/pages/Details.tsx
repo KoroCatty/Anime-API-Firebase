@@ -42,7 +42,7 @@ export default function Details() {
   // URL tabの中身が入っている
   const params = useParams(); // 例 {id: '8'}
 
-  console.log(params.id); // 例8
+  // console.log(params.id); // 例8
 
   // ==================================
   // Get API Data when the page loaded

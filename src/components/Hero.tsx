@@ -37,7 +37,7 @@ const Hero = () => {
       &__box {
         position: absolute;
         top: 40%;
-        left: 90%;
+        left: 22%;
         transform: translate(-90%, -40%);
         padding: 1rem 1.3rem;
         /* background-color: rgba(255, 255, 255, 0.7); */
@@ -51,17 +51,17 @@ const Hero = () => {
         }
         // 520px〜767px
         ${min[1] + max[1]} {
-          left: 25%;
+          left: 15%;
           padding: 1rem 1rem;
         }
         // 768px〜989px
         ${min[2] + max[2]} {
-          left: 95%;
+          left: 22%;
           padding: 1rem 1.2rem;
         }
         // 990px〜1280px
         ${min[3] + max[3]} {
-          left: 95%;
+          left: 18%;
         }
         @media screen and (max-width: 350px) {
           top: 47%;
