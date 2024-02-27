@@ -1,31 +1,45 @@
-# React + TypeScript + Vite
+# Anime API & Firebase Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<!-- Image -->
+![Anime API & Firebase Project](./anime-api-firebase.jpg)
 
-Currently, two official plugins are available:
+This project is built using React (Vite) and leverages the Jikan API to fetch anime data, which is then displayed within a React (VITE) application. 
+It also integrates Firebase for user authentication and to store a list of users' new posts and display them on the Home page.
+Fully responsive and mobile-friendly.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## API Reference
+[Jikan API Documentation](https://docs.api.jikan.moe/)
 
-## Expanding the ESLint configuration
+## Features
+- Fetch and display anime data from the Jikan API.
+- User authentication with Firebase.
+- Ability for users to save their favorite anime to Firebase.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Prerequisites
+Before running this project, make sure you have Node.js installed on your system.
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+To get started with the Anime API & Firebase project, run the following commands:
+
+```bash
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# Anime-API-Firebase
+## Running the project
+```bash
+npm run dev
+```
+
+## Languages & tools
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Firebase](https://firebase.google.com/)
+- [Jikan API](https://jikan.moe/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Router](https://reactrouter.com/)
+- [Joi (Object Schema Validation)](https://joi.dev/)
+- [tsParticles](https://particles.js.org/)
+- [react-slick](https://react-slick.neostack.com/)
+
+

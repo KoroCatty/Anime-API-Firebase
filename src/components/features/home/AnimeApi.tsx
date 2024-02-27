@@ -272,23 +272,21 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
   }, [animeApi]);
 
   // ==================================
-  // Get API Data by Clicking Button
+  // Get API Data 
   // ==================================
   async function getData() {
     try {
       const res = await fetch(`${animeApi}&q=${search}`);
       const json = await res.json();
       setResults(json);
-
-      // displayCharacters(json.data);
     } catch (err) {
       console.log(err);
     }
   }
 
-  // ==================================
+  // ===================================================
   // Change the state by being changed in an input
-  // ==================================
+  // ===================================================
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // to set the value user typed to useState (to make it visible)
     setSearch(e.target.value); // value user typed saves to useState
