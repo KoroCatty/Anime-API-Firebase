@@ -2,6 +2,7 @@
 
 <!-- Image -->
 ![Anime API & Firebase Project](./anime-api-firebase.jpg)
+[Website](https://anime-api-firebase.vercel.app/)
 
 This project is built using React (Vite) and leverages the Jikan API to fetch anime data, which is then displayed within a React (VITE) application. 
 It also integrates Firebase for user authentication and to store a list of users' new posts and display them on the Home page.
@@ -13,7 +14,7 @@ Fully responsive and mobile-friendly.
 ## Features
 - Fetch and display anime data from the Jikan API.
 - User authentication with Firebase.
-- Ability for users to save their favorite anime to Firebase.
+- Ability for users to save their news posts (CRUD Operations).
 
 ## Prerequisites
 Before running this project, make sure you have Node.js installed on your system.
