@@ -16,8 +16,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  // ここで定義したsearchをHome.jsxに渡す
-  const [search, setSearch] = useState(""); // string
+  const [search, setSearch] = useState("");
 
   return (
     <>

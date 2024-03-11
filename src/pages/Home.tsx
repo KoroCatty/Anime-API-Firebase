@@ -3,10 +3,6 @@ import Hero from "../components/Hero";
 import AnimeApi from "../components/features/home/AnimeApi";
 import News from "../components/features/home/News";
 
-// import { AnimeApi } from "../Components/Home/AnimeApi.jsx";
-// import { Footer } from "../Common/Footer.jsx";
-// import News from "../Components/Home/News.jsx";
-
 // firebaseのファイル自体を輸入
 import { auth } from "../service/firebase";
 

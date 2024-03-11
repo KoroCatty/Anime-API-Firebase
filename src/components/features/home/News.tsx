@@ -174,6 +174,12 @@ const newsCSS = css`
 
       &__edit.delete {
         background-color: var(--font);
+        font-size: 1rem;
+
+        // 1px〜519px
+        ${min[0] + max[0]} {
+          font-size: 1rem;
+        }
 
         &:hover {
           background-color: var(--error);

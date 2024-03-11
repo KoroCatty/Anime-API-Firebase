@@ -27,8 +27,8 @@ const Hero = () => {
     ${min[3] + max[3]} {
       height: 90vh;
     }
-    @media screen and (min-width: 1800px) {
-      height: 70vh;
+    @media screen and (min-width: 2300px) {
+      height: 130vh;
     }
 
     .hero {

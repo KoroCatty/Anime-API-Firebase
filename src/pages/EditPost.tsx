@@ -26,13 +26,7 @@ function EditPost() {
   // URL tabの中身が入っている
   const params = useParams();
   console.log(params.id); // 例 ImxDD7HxJlHTBEkemSkL
-  // ========================================================
 
-  // ========================================================
-  // useEffect (DBから一件だけ、読み込み)
-  // ページ読み込み時に一度だけ発火して欲しいので useEffect()を使う。
-  // useEffectの中で asyncを使う場合,もう一度関数を作らなあかん
-  // ========================================================
   useEffect(() => {
     const getPosts = async () => {
       // get values from DB このIDの投稿データを取得
@@ -98,9 +92,7 @@ function EditPost() {
     alert("Your Post has been updated!!");
     navigate("/");
   };
-  // ============================
-  // ページジャンプ
-  // ============================
+
   const navigate = useNavigate();
 
   return (

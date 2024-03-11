@@ -1,12 +1,10 @@
 // API REFERENCE:  https://docs.api.jikan.moe/
-
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
 import { css } from "@emotion/react";
 import { min, max } from "../../../styles/mediaQuery";
 
 import Pagination from "./Pagination";
+import AnimeList from "./AnimeList";
 
 // TYPE
 type PropsType = {
@@ -263,16 +261,13 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
   // End Point
   const animeApi = `https://api.jikan.moe/v4/anime?page=${pageNumber}`; // &limit=20
 
-  // ==========================================================
-  // Get API Data
-  // ==========================================================
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animeApi]);
 
   // ==================================
-  // Get API Data 
+  // Get API Data
   // ==================================
   async function getData() {
     try {
@@ -311,7 +306,6 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
               id="search"
               name="search"
               onChange={(e) => handleChange(e)}
-              // defaultValue={(window.localStorage.getItem("search"))}
               value={search}
               placeholder="Type anime name"
             />
@@ -332,26 +326,10 @@ const AnimeApi = ({ search, setSearch }: PropsType) => {
             {/* HTML出力。 {}で囲まないといけない resultsに何も入っていないと実行されない*/}
             {results &&
               results.data.map((anime, index) => (
-                <div key={index} className="cardResult">
-                  {/*  このURLの中身はクリックしたカードのIDが入ってる*/}
-                  <Link to={`/${anime.mal_id}`}>
-                    <img
-                      src={anime.images.webp.image_url}
-                      alt=""
-                      className="cardResult__img"
-                    />
-                  </Link>
-                  {/* If there's more than 40, add "..." */}
-                  <p className="cardResult__title">
-                    {anime.title.length > 40
-                      ? anime.title.substring(0, 40) + "..."
-                      : anime.title.substring(0, 40)}
-                  </p>
-                </div>
+                // Component
+                <AnimeList key={index} index={index} anime={anime} />
               ))}
           </div>
-          {/* !!results converts results to a boolean. It'll be true if results is not null */}
-          {/*  results.data.length > 0 checks if there are any items in the data array. */}
           <Pagination
             results={!!results && results.data.length > 0}
             resultsData={results}
